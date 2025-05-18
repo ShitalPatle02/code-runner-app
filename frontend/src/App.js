@@ -24,12 +24,12 @@ export default function App() {
     setConsoleContent("Running...\n");
 
     try {
-      const response = await fetch("/execute", {
+      const response = await fetch("http://localhost:8000/execute", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, input: inputData }),
       });
-
+      console.log()
       const data = await response.json();
       setConsoleContent(data.output);
     } catch (error) {
