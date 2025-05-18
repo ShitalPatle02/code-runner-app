@@ -4,7 +4,7 @@ import "./styles.css";
 
 export default function App() {
   const [code, setCode] = useState(
-    `name = input("Enter your name: ")\nage = input("Enter your age: ")\nprint("Hello", name)\nprint("You are", age, "years old")`
+    `import math\nprint('''Life is like riding a bicycle.\nTo keep your balance, you must keep moving....''')\nprint(math.factorial(5))\nprint(7+7)`
   );
   const [consoleContent, setConsoleContent] = useState("");
   const [inputData, setInputData] = useState("");
