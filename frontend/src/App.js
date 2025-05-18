@@ -4,7 +4,7 @@ import "./styles.css";
 
 export default function App() {
   const [code, setCode] = useState(
-    `import math\nprint('''Life is like riding a bicycle.\nTo keep your balance, you must keep moving....''')\nprint(math.factorial(5))\nprint(7+7)`
+    `import math\nprint('''Life is like riding a bicycle.To keep your balance, you must keep moving....''')\nprint("Factorial of 5 is ",math.factorial(5))\nprint(7+7)`
   );
   const [consoleContent, setConsoleContent] = useState("");
   const [inputData, setInputData] = useState("");
