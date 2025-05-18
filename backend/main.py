@@ -2,9 +2,6 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from .executor import run_code
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
 
 app = FastAPI()
 
@@ -16,11 +13,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.mount("/", StaticFiles(directory="../frontend/build", html=True), name="static")
-
-@app.get("/")
-def read_index():
-    return FileResponse("../frontend/build/index.html")
 
 class CodeRequest(BaseModel):
     code: str
