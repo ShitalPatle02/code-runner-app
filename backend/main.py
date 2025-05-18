@@ -19,14 +19,14 @@ app.add_middleware(
 class CodeRequest(BaseModel):
     code: str
     input: str
+@app.post("/execute")
+async def execute_code(req: CodeRequest):
+    output = run_code(req.code, req.input)
+    # Just return output, frontend formats it with separator
+    return {"output": output.strip()}
 app.mount(
     "/", 
     StaticFiles(directory=os.path.join(os.getcwd(), "frontend/build"), html=True), 
     name="frontend"
 )
 
-@app.post("/execute")
-async def execute_code(req: CodeRequest):
-    output = run_code(req.code, req.input)
-    # Just return output, frontend formats it with separator
-    return {"output": output.strip()}
