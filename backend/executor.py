@@ -1,6 +1,8 @@
 import subprocess
 import tempfile
 import os
+import sys
+
 
 def run_code(code: str, input_data: str) -> str:
     with tempfile.NamedTemporaryFile("w+", suffix=".py", delete=False) as f:
@@ -10,12 +12,12 @@ def run_code(code: str, input_data: str) -> str:
 
     try:
         result = subprocess.run(
-            ["python", "-u", filename],  # unbuffered output
-            input=input_data + "\n",
-            capture_output=True,
-            text=True,
-            timeout=10
-        )
+             [sys.executable, "-u", filename],
+              input=input_data + "\n",
+              capture_output=True,
+              text=True,
+              timeout=10
+)
         output = result.stdout + result.stderr
     except subprocess.TimeoutExpired:
         output = "Error: Execution timed out."
