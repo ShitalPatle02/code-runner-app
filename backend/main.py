@@ -2,7 +2,9 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from .executor import run_code
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+import os
 app = FastAPI()
 
 # CORS settings for frontend access
@@ -17,10 +19,12 @@ app.add_middleware(
 class CodeRequest(BaseModel):
     code: str
     input: str
-@app.get("/")
-async def root():
-    # This handles GET requests to /
-    return {"message": "Code runner backend is live"}
+app.mount(
+    "/", 
+    StaticFiles(directory=os.path.join(os.getcwd(), "frontend/build"), html=True), 
+    name="frontend"
+)
+
 @app.post("/execute")
 async def execute_code(req: CodeRequest):
     output = run_code(req.code, req.input)
