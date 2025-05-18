@@ -17,7 +17,10 @@ app.add_middleware(
 class CodeRequest(BaseModel):
     code: str
     input: str
-
+@app.get("/")
+async def root():
+    # This handles GET requests to /
+    return {"message": "Code runner backend is live"}
 @app.post("/execute")
 async def execute_code(req: CodeRequest):
     output = run_code(req.code, req.input)
